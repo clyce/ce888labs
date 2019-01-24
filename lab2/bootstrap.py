@@ -6,7 +6,7 @@ import matplotlib
 # matplotlib.use('Agg')
 
 
-def boostrap(ci):
+def bootstrap(ci):
 
     def bootstrap_(sample, sample_size, iterations):
         subsamples = np.random.choice(sample, size=(sample_size, iterations))
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     data = df.values.T[1]
     boots = []
     for i in range(100, 100000, 1000):
-        boot = boostrap(95)(data, data.shape[0], i)
+        boot = bootstrap(95)(data, data.shape[0], i)
         boots.append([i, boot[0], "mean"])
         boots.append([i, boot[1], "lower"])
         boots.append([i, boot[2], "upper"])
