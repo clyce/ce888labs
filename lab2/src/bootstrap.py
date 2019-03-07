@@ -49,7 +49,9 @@ if __name__ == "__main__":
     sns_plot = sns.lmplot(
         df_boot.columns[0], df_boot.columns[1], data=df_boot, fit_reg=False, hue="Value")
 
-    sns_plot.axes[0, 0].set_ylim(0,)
+    means = df_boot.iloc[:, 1]
+    print(min(means), max(means))
+    sns_plot.axes[0, 0].set_ylim(min(means), max(means))
     sns_plot.axes[0, 0].set_xlim(0, 100000)
 
     sns_plot.savefig(output, bbox_inches='tight')
