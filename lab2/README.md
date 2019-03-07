@@ -55,3 +55,7 @@ Bootstrap result on ci:  95  after  100000 iterations
         new |  mean:  30.48028088607595 lower:  30.449421 upper:  30.506742
 newer is better since the p is 0.0
 ```
+
+## Power Analysis
+
+The power analysis is named as [permutation_test.py](src/permutation_test.py) instead of `power.py`
