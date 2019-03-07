@@ -2,6 +2,7 @@ import numpy as np
 import seaborn as sns
 import pandas as pd
 import matplotlib
+import argparse
 
 # matplotlib.use('Agg')
 
@@ -22,7 +23,18 @@ def bootstrap(ci):
 
 
 if __name__ == "__main__":
-    df = pd.read_csv('./salaries.csv')
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("data", type=str, help="path for the data")
+    parser.add_argument("--ci", "--confidence-interval", type=int,
+                        help="The confidence interval of the bootstrap analysis, default is 95")
+    parser.add_argument("--out", "--output-file", type=str,
+                        help="output filename, default to `out/bootstrap_confidence.png`")
+    args = parser.parse_args()
+    ci = args.ci or 95
+    output = args.out or 'out/boostrap_confidence.png'
+
+    df = pd.read_csv(args.data)
 
     data = df.values.T[1]
     boots = []
@@ -40,8 +52,7 @@ if __name__ == "__main__":
     sns_plot.axes[0, 0].set_ylim(0,)
     sns_plot.axes[0, 0].set_xlim(0, 100000)
 
-    sns_plot.savefig("bootstrap_confidence.png", bbox_inches='tight')
-    sns_plot.savefig("bootstrap_confidence.pdf", bbox_inches='tight')
+    sns_plot.savefig(output, bbox_inches='tight')
 
     # print ("Mean: %f")%(np.mean(data))
     # print ("Var: %f")%(np.var(data))
